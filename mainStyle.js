@@ -33,4 +33,43 @@ module.exports = StyleSheet.create({
       },
     }),
   },
+
+  navBarLeft: {
+    paddingLeft:15,
+    width:60,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
+
+  navBarRight: {
+    paddingRight:15,
+    width:60,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+  },
+
+  navBarImage: {
+    width: 18,
+    height: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  navBarTitle: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  navBarState: {
+    fontSize: 17,
+    color: 'white',
+  },
+
+  title: {
+    fontSize: 19,
+    fontWeight: '400',
+    color: 'white',
+  },
+
 });

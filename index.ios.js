@@ -9,7 +9,8 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  Image,
+  View,
 } from 'react-native';
 
 var mainStyles = require('./mainstyle');
@@ -19,7 +20,15 @@ class EarlyMath extends Component {
     return (
       <View style={mainStyles.mainContainer}>
         <View style={mainStyles.navBar}>
-
+          <View style={mainStyles.navBarLeft}>
+            <Image source={require('image!more')} style={mainStyles.navBarImage} />
+          </View>
+          <View style={mainStyles.navBarTitle}>
+            <Text style={mainStyles.title}>看图数数</Text>
+          </View>
+          <View style={mainStyles.navBarRight}>
+            <Text style={mainStyles.navBarState}>4/10</Text>
+          </View>
         </View>
         <View style={styles.container}>
           <Text style={styles.welcome}>
