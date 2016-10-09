@@ -12,10 +12,12 @@ import {
   View
 } from 'react-native';
 
+var mainStyle = require('./mainStyle');
+
 class EarlyMath extends Component {
   render() {
     return (
-      <View style={styles.container}>
+      <View style={[mainStyle.mainBackground, styles.container]}>
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
@@ -36,7 +38,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
   },
   welcome: {
     fontSize: 20,
