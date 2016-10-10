@@ -13,7 +13,7 @@ import {
   View,
 } from 'react-native';
 
-var mainStyles = require('./mainstyle');
+var mainStyles = require('./mainStyle');
 
 class EarlyMath extends Component {
   render() {

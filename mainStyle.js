@@ -7,39 +7,46 @@ var {
   StyleSheet,
 } = React;
 
-
 module.exports = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
-    backgroundColor: '#4F5D73',
-  },
+    mainContainer: {
+        flex: 1,
+        backgroundColor: '#4F5D73',
+    },
 
-  navBar: {
-    flexDirection:'row',
-    shadowColor: 'black',
-    shadowOpacity: 0.3,
-    ...Platform.select({
-      ios: {
-        height: 64,
-        paddingTop: 20,
-        shadowOffset: {
-          width: 0,
-          height: 0.5,
+    navBar: {
+      flexDirection:'row',
+      ...Platform.select({
+        ios: {
+          height: 64,
+          paddingTop: 20,
+          shadowColor: 'black',
+          shadowOpacity: 0.3,
+          shadowOffset: {
+            width: 0,
+            height: 0.5,
+          },
         },
-      },
-      android: {
-        height: 44,
-        elevation: 1,
-      },
-    }),
-  },
+        android: {
+          height: 44,
+          borderBottomColor: 'rgba(0,0,0,0.3)',
+          borderBottomWidth: 0.5,
+        },
+      }),
+    },
 
-  navBarLeft: {
-    paddingLeft:15,
-    width:60,
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-  },
+    navBarLeft: {
+      paddingLeft: 15,
+      width: 60,
+      marginRight: 40,
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+    },
+
+    navBarRight2: {
+      width:40,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
 
   navBarRight: {
     paddingRight:15,
