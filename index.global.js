@@ -18,6 +18,9 @@ import {
 
 var mainStyles = require('./mainStyle');
 
+var numberOfRow = 5, numberPerRow = 3;
+var cardItems = [];
+
 class Card extends Component {
     render() {
         return (
@@ -30,11 +33,84 @@ class Card extends Component {
 class EarlyMath extends Component {
   constructor(props) {
     super(props);
+    this.__initCardItems();
     this.state = {
       title: '看图数数',
       language: 0,
       mode: 0,
     };
+  }
+
+  __initCardItems() {
+    cardItems = [];
+
+    let images = [
+        require('image!number_1'),
+        require('image!number_2'),
+        require('image!number_3'),
+        require('image!number_4'),
+        require('image!number_5'),
+        require('image!number_6'),
+        require('image!number_7'),
+        require('image!number_8'),
+        require('image!number_9'),
+    ];
+
+    let chineses = [
+      '一辆汽车',
+      '两头狮子',
+      '三头大象',
+      '四个苹果',
+      '五只蝴蝶',
+      '六幢房子',
+      '七朵小花',
+      '八把琴',
+      '九颗草莓',
+      '十',
+      '二十',
+      '三十',
+      '四十',
+      '五十',
+      '零',
+    ];
+
+    let englishs = [
+      'one',
+      'two',
+      'three',
+      'four',
+      'five',
+      'six',
+      'seven',
+      'eight',
+      'nine',
+      'ten',
+      'twenty',
+      'thirty',
+      'forty',
+      'fifty',
+      'zero',
+    ];
+
+    for (var i = 0; i < numberPerRow * numberOfRow; i++) {
+      var image, number = i + 1;
+
+      if (i < images.length) {
+        image = images[i];
+      } else {
+        image = null;
+        number = (i - images.length + 1) * 10;
+        if (i === numberPerRow * numberOfRow - 1) {
+          number = 0;
+        }
+      }
+      cardItems.push({
+        number: number,
+        image: image,
+        chineses: chineses[i],
+        english: englishs[i],
+      });
+    }
   }
 
   __onPressMore() {
@@ -48,54 +124,45 @@ class EarlyMath extends Component {
   __onPressLanguage() {
     console.log('language');
   }
-  __cardClicked(index: number): void {
+  __cardClicked(card): void {
+    console.log('number ' + card.number);
     this.setState({
       language: this.state.language === 0 ? 1 : 0,
     });
   }
 
   render() {
-      var numberOfRow = 5, numberPerRow = 3;
-      let cards = [], rows = [];
-      let images = [
-          require('image!number_1'),
-          require('image!number_2'),
-          require('image!number_3'),
-          require('image!number_4'),
-          require('image!number_5'),
-          require('image!number_6'),
-          require('image!number_7'),
-          require('image!number_8'),
-          require('image!number_9'),
-      ]
-      for (var i = 0; i < numberPerRow * numberOfRow; i++) {
-          if (i < images.length) {
-              cards.push(
-                  <TouchableHighlight
-                      style={styles.card}
-                      key={'card'+i}
-                      onPress={this.__cardClicked.bind(this, i)} >
-                      <Image source={images[i]} style={styles.cardImage} />
-                  </TouchableHighlight>
-              );
-          } else {
-              cards.push(
-                  <TouchableHighlight style={styles.card}
-                      key={'card'+i}>
-                      <Image source={images[i%9]} style={styles.cardImage} />
-                  </TouchableHighlight>
-              );
-          }
+    let cards = [], rows = [];
+    for (var i = 0; i < cardItems.length; i++) {
+      var card = cardItems[i];
+      var inner;
+      var style = styles.card;
+      if (card.image) {
+        inner = <Image source={card.image} style={styles.cardImage} />;
+      } else {
+        inner = <Text style={styles.cardNumber}>{card.number}</Text>;
+        style = [styles.card, styles.card2];
       }
-      for (var i = 0; i < numberOfRow; i++) {
-          var start = i * numberPerRow;
-          rows.push(
-              <View style={styles.row}
-                  key={'row'+i}>
-                  { cards.slice(start, start + numberPerRow) }
-              </View>
-          )
-      }
+      cards.push(
+          <TouchableHighlight
+              style={style}
+              key={card.number}
+              onPress={this.__cardClicked.bind(this, card)} >
+              {inner}
+          </TouchableHighlight>
+      );
+    }
+
+    for (var i = 0; i < numberOfRow; i++) {
+        var start = i * numberPerRow;
+        rows.push(
+            <View style={styles.row}
+                key={'row'+i}>
+                { cards.slice(start, start + numberPerRow) }
+            </View>
+        )
+    }
+
     return (
       <View style={mainStyles.mainContainer}>
 
@@ -157,10 +224,21 @@ const styles = StyleSheet.create({
       }),
   },
   cardImage: {
-      flex: 1,
-      width: null,
-      height: null,
-      resizeMode: 'stretch',
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: 'stretch',
+  },
+  card2: {
+    alignItems: 'center',
+  },
+  cardNumber: {
+    flex: 1,
+    width: null,
+    height: null,
+    fontSize: 72,
+    paddingTop: 5,
+    color: '#F5CF87',
   },
 });
 
