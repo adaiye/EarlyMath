@@ -11,6 +11,7 @@
 
 #import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
+#import "UIColor+Hex.h"
 
 @implementation AppDelegate
 
@@ -24,7 +25,7 @@
                                                       moduleName:@"EarlyMath"
                                                initialProperties:nil
                                                    launchOptions:launchOptions];
-  rootView.backgroundColor = [UIColor colorWithRed:79 green:93 blue:115 alpha:1];
+  rootView.backgroundColor = [UIColor colorWithRGBHex:0x4F5D73];
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
