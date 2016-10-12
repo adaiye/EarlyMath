@@ -15,6 +15,7 @@ import {
   TouchableHighlight,
   Platform,
 } from 'react-native';
+import GoogleAnalytics from 'react-native-google-analytics-bridge';
 
 var mainStyles = require('./mainStyle');
 
@@ -33,7 +34,16 @@ class Card extends Component {
 class EarlyMath extends Component {
   constructor(props) {
     super(props);
+    this.__initApp();
     this.__initCardItems();
+    this.__initState();
+  }
+
+  __initApp() {
+    GoogleAnalytics.setTrackerId('UA-85477621-1');
+  }
+
+  __initState() {
     this.state = {
       title: '看图数数',
       language: 0,
