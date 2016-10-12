@@ -12,11 +12,14 @@
 #import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
 #import "UIColor+Hex.h"
+#import "iflyMSC/iflyMSC.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [IFlySpeechUtility createUtility:@"appid=57fe1a33"];
+  
   NSURL *jsCodeLocation;
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.global" fallbackResource:nil];
