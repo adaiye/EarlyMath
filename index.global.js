@@ -16,6 +16,7 @@ import {
   Platform,
 } from 'react-native';
 import GoogleAnalytics from 'react-native-google-analytics-bridge';
+import Config from 'react-native-config';
 
 var mainStyles = require('./mainStyle');
 
@@ -40,7 +41,7 @@ class EarlyMath extends Component {
   }
 
   __initApp() {
-    GoogleAnalytics.setTrackerId('UA-85477621-1');
+    GoogleAnalytics.setTrackerId(Config.GA_Tracker_ID);
   }
 
   __initState() {
