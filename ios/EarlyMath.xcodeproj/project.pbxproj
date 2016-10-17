@@ -33,6 +33,7 @@
 		35932BB81DB5223500A2AF99 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 35932BB71DB5223500A2AF99 /* libstdc++.6.0.9.tbd */; };
 		35932BBA1DB5223E00A2AF99 /* libetts_device_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 35932BB91DB5223E00A2AF99 /* libetts_device_simulator.a */; };
 		35932BE71DB524BA00A2AF99 /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 35932BE61DB524BA00A2AF99 /* libiconv.2.4.0.tbd */; };
+		35932BF71DB5259900A2AF99 /* EMSpeecher.m in Sources */ = {isa = PBXBuildFile; fileRef = 35932BF61DB5259900A2AF99 /* EMSpeecher.m */; };
 		7AB7C6E2FD284F57B95F597F /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D177812DDF94339AF5EC57C /* libReactNativeConfig.a */; };
 		7F993D48E70D47E8A8BC4741 /* libRCTGoogleAnalyticsBridge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 603C036EE31E47C684270707 /* libRCTGoogleAnalyticsBridge.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
@@ -163,6 +164,8 @@
 		35932BC01DB5227B00A2AF99 /* BDSSpeechSynthesizerParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSpeechSynthesizerParams.h; sourceTree = "<group>"; };
 		35932BC11DB5227B00A2AF99 /* BDSSynthesizerLogLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSynthesizerLogLevel.h; sourceTree = "<group>"; };
 		35932BE61DB524BA00A2AF99 /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
+		35932BF51DB5259900A2AF99 /* EMSpeecher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMSpeecher.h; sourceTree = "<group>"; };
+		35932BF61DB5259900A2AF99 /* EMSpeecher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMSpeecher.m; sourceTree = "<group>"; };
 		603C036EE31E47C684270707 /* libRCTGoogleAnalyticsBridge.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTGoogleAnalyticsBridge.a; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		79A4A58F70E646B08D9F7828 /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
@@ -264,6 +267,7 @@
 		13B07FAE1A68108700A75B9A /* EarlyMath */ = {
 			isa = PBXGroup;
 			children = (
+				35932BF41DB5259900A2AF99 /* Voice */,
 				35932BBB1DB5227B00A2AF99 /* BDSSpeechSynthesizer */,
 				358E05951DAC8AD50088076A /* Common */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -342,6 +346,16 @@
 			);
 			name = BDSSpeechSynthesizer;
 			path = EarlyMath/BDSSpeechSynthesizer;
+			sourceTree = "<group>";
+		};
+		35932BF41DB5259900A2AF99 /* Voice */ = {
+			isa = PBXGroup;
+			children = (
+				35932BF51DB5259900A2AF99 /* EMSpeecher.h */,
+				35932BF61DB5259900A2AF99 /* EMSpeecher.m */,
+			);
+			name = Voice;
+			path = EarlyMath/Voice;
 			sourceTree = "<group>";
 		};
 		78C398B11ACF4ADC00677621 /* Products */ = {
@@ -623,6 +637,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35932BF71DB5259900A2AF99 /* EMSpeecher.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				358E05981DAC8AF70088076A /* UIColor+Hex.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
