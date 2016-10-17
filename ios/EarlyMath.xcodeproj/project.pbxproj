@@ -25,6 +25,13 @@
 		351FDED41DAE3EBC006B6C61 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 351FDED31DAE3EBC006B6C61 /* libz.tbd */; };
 		351FDED61DAE3EC7006B6C61 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 351FDED51DAE3EC7006B6C61 /* libsqlite3.0.tbd */; };
 		358E05981DAC8AF70088076A /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 358E05971DAC8AF70088076A /* UIColor+Hex.m */; };
+		35932BA21DB521F800A2AF99 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 35932BA11DB521F800A2AF99 /* libz.1.2.5.tbd */; };
+		35932BB01DB5220900A2AF99 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35932BAF1DB5220900A2AF99 /* AudioToolbox.framework */; };
+		35932BB21DB5220F00A2AF99 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35932BB11DB5220F00A2AF99 /* CoreTelephony.framework */; };
+		35932BB41DB5221700A2AF99 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35932BB31DB5221700A2AF99 /* AVFoundation.framework */; };
+		35932BB61DB5222A00A2AF99 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 35932BB51DB5222A00A2AF99 /* libc++.tbd */; };
+		35932BB81DB5223500A2AF99 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 35932BB71DB5223500A2AF99 /* libstdc++.6.0.9.tbd */; };
+		35932BBA1DB5223E00A2AF99 /* libetts_device_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 35932BB91DB5223E00A2AF99 /* libetts_device_simulator.a */; };
 		7AB7C6E2FD284F57B95F597F /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D177812DDF94339AF5EC57C /* libReactNativeConfig.a */; };
 		7F993D48E70D47E8A8BC4741 /* libRCTGoogleAnalyticsBridge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 603C036EE31E47C684270707 /* libRCTGoogleAnalyticsBridge.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
@@ -141,6 +148,19 @@
 		351FDED51DAE3EC7006B6C61 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		358E05961DAC8AF70088076A /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
 		358E05971DAC8AF70088076A /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
+		35932BA11DB521F800A2AF99 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
+		35932BAF1DB5220900A2AF99 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		35932BB11DB5220F00A2AF99 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		35932BB31DB5221700A2AF99 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		35932BB51DB5222A00A2AF99 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		35932BB71DB5223500A2AF99 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		35932BB91DB5223E00A2AF99 /* libetts_device_simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libetts_device_simulator.a; path = EarlyMath/Libs/libetts_device_simulator.a; sourceTree = "<group>"; };
+		35932BBC1DB5227B00A2AF99 /* BDSBuiltInPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSBuiltInPlayer.h; sourceTree = "<group>"; };
+		35932BBD1DB5227B00A2AF99 /* BDSSpeechSynthesizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSpeechSynthesizer.h; sourceTree = "<group>"; };
+		35932BBE1DB5227B00A2AF99 /* BDSSpeechSynthesizerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSpeechSynthesizerDelegate.h; sourceTree = "<group>"; };
+		35932BBF1DB5227B00A2AF99 /* BDSSpeechSynthesizerErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSpeechSynthesizerErrors.h; sourceTree = "<group>"; };
+		35932BC01DB5227B00A2AF99 /* BDSSpeechSynthesizerParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSpeechSynthesizerParams.h; sourceTree = "<group>"; };
+		35932BC11DB5227B00A2AF99 /* BDSSynthesizerLogLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSynthesizerLogLevel.h; sourceTree = "<group>"; };
 		603C036EE31E47C684270707 /* libRCTGoogleAnalyticsBridge.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTGoogleAnalyticsBridge.a; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		79A4A58F70E646B08D9F7828 /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
@@ -153,6 +173,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35932BBA1DB5223E00A2AF99 /* libetts_device_simulator.a in Frameworks */,
+				35932BB81DB5223500A2AF99 /* libstdc++.6.0.9.tbd in Frameworks */,
+				35932BB61DB5222A00A2AF99 /* libc++.tbd in Frameworks */,
+				35932BB41DB5221700A2AF99 /* AVFoundation.framework in Frameworks */,
+				35932BB21DB5220F00A2AF99 /* CoreTelephony.framework in Frameworks */,
+				35932BB01DB5220900A2AF99 /* AudioToolbox.framework in Frameworks */,
+				35932BA21DB521F800A2AF99 /* libz.1.2.5.tbd in Frameworks */,
 				351FDED61DAE3EC7006B6C61 /* libsqlite3.0.tbd in Frameworks */,
 				351FDED41DAE3EBC006B6C61 /* libz.tbd in Frameworks */,
 				351FDED21DAE3EAF006B6C61 /* SystemConfiguration.framework in Frameworks */,
@@ -234,6 +261,7 @@
 		13B07FAE1A68108700A75B9A /* EarlyMath */ = {
 			isa = PBXGroup;
 			children = (
+				35932BBB1DB5227B00A2AF99 /* BDSSpeechSynthesizer */,
 				358E05951DAC8AD50088076A /* Common */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -273,6 +301,13 @@
 		351FDECE1DAE3EA1006B6C61 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				35932BB91DB5223E00A2AF99 /* libetts_device_simulator.a */,
+				35932BB71DB5223500A2AF99 /* libstdc++.6.0.9.tbd */,
+				35932BB51DB5222A00A2AF99 /* libc++.tbd */,
+				35932BB31DB5221700A2AF99 /* AVFoundation.framework */,
+				35932BB11DB5220F00A2AF99 /* CoreTelephony.framework */,
+				35932BAF1DB5220900A2AF99 /* AudioToolbox.framework */,
+				35932BA11DB521F800A2AF99 /* libz.1.2.5.tbd */,
 				351FDED51DAE3EC7006B6C61 /* libsqlite3.0.tbd */,
 				351FDED31DAE3EBC006B6C61 /* libz.tbd */,
 				351FDED11DAE3EAF006B6C61 /* SystemConfiguration.framework */,
@@ -289,6 +324,20 @@
 			);
 			name = Common;
 			path = EarlyMath/Common;
+			sourceTree = "<group>";
+		};
+		35932BBB1DB5227B00A2AF99 /* BDSSpeechSynthesizer */ = {
+			isa = PBXGroup;
+			children = (
+				35932BBC1DB5227B00A2AF99 /* BDSBuiltInPlayer.h */,
+				35932BBD1DB5227B00A2AF99 /* BDSSpeechSynthesizer.h */,
+				35932BBE1DB5227B00A2AF99 /* BDSSpeechSynthesizerDelegate.h */,
+				35932BBF1DB5227B00A2AF99 /* BDSSpeechSynthesizerErrors.h */,
+				35932BC01DB5227B00A2AF99 /* BDSSpeechSynthesizerParams.h */,
+				35932BC11DB5227B00A2AF99 /* BDSSynthesizerLogLevel.h */,
+			);
+			name = BDSSpeechSynthesizer;
+			path = EarlyMath/BDSSpeechSynthesizer;
 			sourceTree = "<group>";
 		};
 		78C398B11ACF4ADC00677621 /* Products */ = {
@@ -611,6 +660,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/EarlyMath\"",
 					"\"$(SRCROOT)/EarlyMath\"",
+					"$(PROJECT_DIR)/EarlyMath/Libs",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -642,6 +692,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/EarlyMath\"",
 					"\"$(SRCROOT)/EarlyMath\"",
+					"$(PROJECT_DIR)/EarlyMath/Libs",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
