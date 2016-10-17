@@ -66,4 +66,4 @@
 -dontwarn okio.**
 
 # ReactNativeConfig
--keep class com.earlymath.BuildConfig { *; }
+-keep class com.adaiye.EarlyMath.BuildConfig { *; }

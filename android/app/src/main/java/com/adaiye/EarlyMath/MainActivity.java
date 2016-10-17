@@ -1,4 +1,4 @@
-package com.earlymath;
+package com.adaiye.EarlyMath;
 
 import com.facebook.react.ReactActivity;
 
