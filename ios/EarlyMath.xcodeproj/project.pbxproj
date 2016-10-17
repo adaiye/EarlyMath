@@ -32,6 +32,7 @@
 		35932BB61DB5222A00A2AF99 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 35932BB51DB5222A00A2AF99 /* libc++.tbd */; };
 		35932BB81DB5223500A2AF99 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 35932BB71DB5223500A2AF99 /* libstdc++.6.0.9.tbd */; };
 		35932BBA1DB5223E00A2AF99 /* libetts_device_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 35932BB91DB5223E00A2AF99 /* libetts_device_simulator.a */; };
+		35932BE71DB524BA00A2AF99 /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 35932BE61DB524BA00A2AF99 /* libiconv.2.4.0.tbd */; };
 		7AB7C6E2FD284F57B95F597F /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D177812DDF94339AF5EC57C /* libReactNativeConfig.a */; };
 		7F993D48E70D47E8A8BC4741 /* libRCTGoogleAnalyticsBridge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 603C036EE31E47C684270707 /* libRCTGoogleAnalyticsBridge.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
@@ -161,6 +162,7 @@
 		35932BBF1DB5227B00A2AF99 /* BDSSpeechSynthesizerErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSpeechSynthesizerErrors.h; sourceTree = "<group>"; };
 		35932BC01DB5227B00A2AF99 /* BDSSpeechSynthesizerParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSpeechSynthesizerParams.h; sourceTree = "<group>"; };
 		35932BC11DB5227B00A2AF99 /* BDSSynthesizerLogLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSynthesizerLogLevel.h; sourceTree = "<group>"; };
+		35932BE61DB524BA00A2AF99 /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
 		603C036EE31E47C684270707 /* libRCTGoogleAnalyticsBridge.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTGoogleAnalyticsBridge.a; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		79A4A58F70E646B08D9F7828 /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35932BE71DB524BA00A2AF99 /* libiconv.2.4.0.tbd in Frameworks */,
 				35932BBA1DB5223E00A2AF99 /* libetts_device_simulator.a in Frameworks */,
 				35932BB81DB5223500A2AF99 /* libstdc++.6.0.9.tbd in Frameworks */,
 				35932BB61DB5222A00A2AF99 /* libc++.tbd in Frameworks */,
@@ -301,6 +304,7 @@
 		351FDECE1DAE3EA1006B6C61 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				35932BE61DB524BA00A2AF99 /* libiconv.2.4.0.tbd */,
 				35932BB91DB5223E00A2AF99 /* libetts_device_simulator.a */,
 				35932BB71DB5223500A2AF99 /* libstdc++.6.0.9.tbd */,
 				35932BB51DB5222A00A2AF99 /* libc++.tbd */,
