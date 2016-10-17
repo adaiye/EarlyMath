@@ -2,6 +2,7 @@ package com.adaiye.EarlyMath;
 
 import android.app.Application;
 
+import com.adaiye.EarlyMath.Common.EMReactPackage;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -25,6 +26,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+          new EMReactPackage(),
           new GoogleAnalyticsBridgePackage(),
           new ReactNativeConfigPackage()
       );
