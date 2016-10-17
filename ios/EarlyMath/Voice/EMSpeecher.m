@@ -8,6 +8,7 @@
 
 #import "EMSpeecher.h"
 #import "BDSSpeechSynthesizer.h"
+#import "ReactNativeConfig.h"
 
 @interface EMSpeecher()<BDSSpeechSynthesizerDelegate>{
 
@@ -44,7 +45,9 @@
 }
 
 -(void)configureOnlineTTS {
-  [_speechSynthesizer setApiKey:@"smjpzMZK9KpeNyYzlbYmG0pK" withSecretKey:@"3f60cf4dce8e615a7d192b26ac3b3d1f"];
+  NSString *apiKey    = [ReactNativeConfig envFor:@"Baidu_YuYin_Api_Key_iOS"];
+  NSString *secretKey = [ReactNativeConfig envFor:@"Baidu_YuYin_Secret_Key_iOS"];
+  [_speechSynthesizer setApiKey:apiKey withSecretKey:secretKey];
   [_speechSynthesizer setSynthParam:@(10) forKey:BDS_SYNTHESIZER_PARAM_ONLINE_REQUEST_TIMEOUT];
 }
 
