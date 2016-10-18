@@ -17,6 +17,7 @@ import {
   NativeModules,
   AsyncStorage,
   LayoutAnimation,
+  ListView,
 } from 'react-native';
 import GoogleAnalytics from 'react-native-google-analytics-bridge';
 import Config from 'react-native-config';
@@ -63,8 +64,8 @@ class Card extends Component {
 class EarlyMath extends Component {
   constructor(props) {
     super(props);
-    this.__initAppState();
     this.__initLecture();
+    this.__initAppState();
     this.__initApp();
     this.__initCardItems();
     // calculate styles
@@ -72,6 +73,7 @@ class EarlyMath extends Component {
   }
 
   __initAppState() {
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       lectureId : 1,
       lessonId : 1,
@@ -79,10 +81,10 @@ class EarlyMath extends Component {
       mode: 0,
       leftBarWidth: kLeftBarWidth,
       leftBarLeft: -kLeftBarWidth,
+      dataSource: ds.cloneWithRows(lectureItems[0].lessons),
     };
     try {
       AsyncStorage.multiGet([Key_AppState_LectureId, Key_AppState_LessonId, Key_AppState_Language, Key_AppState_Mode], (err, stores) => {
-        console.log(stores);
         stores.map((result, i, store) => {
           // get at each store's key/value so you can work with it
           let key = store[i][0];
@@ -134,7 +136,6 @@ class EarlyMath extends Component {
     les2.id = 2;
     les2.title = '看数识数';
     l.lessons.push(les2);
-
   }
 
   __initApp() {
@@ -206,6 +207,11 @@ class EarlyMath extends Component {
     return '';
   }
 
+  __renderRow(rowData) {
+    var s = this.state.lessonId === rowData.id ? styles.listViewTextSelected : styles.listViewText;
+    return (<View style={styles.listViewRow}><Text style={[s, {width: this.state.leftBarWidth}]}>{rowData.title}</Text></View>);
+  }
+
   render() {
     let cards = [], rows = [];
     for (var i = 0; i < cardItems.length; i++) {
@@ -262,8 +268,10 @@ class EarlyMath extends Component {
           </View>
 
           <View style={[mainStyles.leftBar, estyles.leftBar, {left: this.state.leftBarLeft, width: this.state.leftBarWidth}]}>
-            <View style={mainStyles.mainContainerInner}>
-            </View>
+            <ListView style={[mainStyles.mainContainerInner, {width: this.state.leftBarWidth}]}
+              dataSource={this.state.dataSource}
+              renderRow={(rowData) => this.__renderRow(rowData)}>
+            </ListView>
           </View>
         </View>
 
@@ -274,7 +282,7 @@ class EarlyMath extends Component {
 }
 const estyles = EStyleSheet.create({
   leftBar: {
-  height: '100%'
+    height: '100%'
   }
 });
 
@@ -328,6 +336,29 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     color: '#F5CF87',
   },
+
+  listViewRow: {
+    height : 44,
+    width: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderBottomColor: 'rgba(0,0,0,0.3)',
+    borderBottomWidth: 0.5,
+  },
+  listViewText: {
+    paddingLeft: 10,
+    justifyContent : 'center',
+    alignItems : 'center',
+    fontSize : 17,
+    color : '#F5CF87'
+  },
+  listViewTextSelected: {
+    paddingLeft: 10,
+    justifyContent : 'center',
+    alignItems : 'center',
+    fontSize : 17,
+    color : 'red'
+  }
 });
 
 AppRegistry.registerComponent('EarlyMath', () => EarlyMath);
