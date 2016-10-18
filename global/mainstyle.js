@@ -12,6 +12,32 @@ module.exports = StyleSheet.create({
     flex : 1,
     backgroundColor : '#4F5D73',
   },
+  mainContainerInner : {
+    flex : 1,
+    backgroundColor : 'transparent',
+  },
+
+  leftBar : {
+    // width : 100,
+    backgroundColor : '#4F5D73',
+    top : 1,
+    position: 'absolute',
+    paddingBottom: 44,
+    ...Platform.select({
+      ios : {
+        shadowColor : 'black',
+        shadowOpacity : 0.3,
+        shadowOffset : {
+          width : 2.0,
+          height : 0,
+        },
+      },
+      android : {
+        borderRightColor : 'rgba(0,0,0,0.3)',
+        borderRightWidth : 0.5,
+      },
+    }),
+  },
 
   navBar : {
     flexDirection : 'row',
@@ -36,8 +62,7 @@ module.exports = StyleSheet.create({
 
   navBarLeft : {
     paddingLeft : 15,
-    width : 60,
-    marginRight : 40,
+    width : 45,
     justifyContent : 'center',
     alignItems : 'flex-start',
   },
@@ -65,7 +90,7 @@ module.exports = StyleSheet.create({
   navBarTitle : {
     flex : 1,
     justifyContent : 'center',
-    alignItems : 'center',
+    alignItems : 'flex-start',
   },
 
   navBarState : {

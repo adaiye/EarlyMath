@@ -16,9 +16,11 @@ import {
   Platform,
   NativeModules,
   AsyncStorage,
+  LayoutAnimation,
 } from 'react-native';
 import GoogleAnalytics from 'react-native-google-analytics-bridge';
 import Config from 'react-native-config';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 var Speecher = NativeModules.EMSpeecher;
 
@@ -44,6 +46,7 @@ class Lecture {
   }
 }
 
+var kLeftBarWidth = 100;
 var numberOfRow = 5, numberPerRow = 3;
 var cardItems;
 var lectureItems;
@@ -64,6 +67,8 @@ class EarlyMath extends Component {
     this.__initLecture();
     this.__initApp();
     this.__initCardItems();
+    // calculate styles
+    EStyleSheet.build();
   }
 
   __initAppState() {
@@ -72,6 +77,8 @@ class EarlyMath extends Component {
       lessonId : 1,
       language: 0,
       mode: 0,
+      leftBarWidth: kLeftBarWidth,
+      leftBarLeft: -kLeftBarWidth,
     };
     try {
       AsyncStorage.multiGet([Key_AppState_LectureId, Key_AppState_LessonId, Key_AppState_Language, Key_AppState_Mode], (err, stores) => {
@@ -139,15 +146,31 @@ class EarlyMath extends Component {
   }
 
   __onPressMore() {
-    var lesId = (this.state.lessonId + 1) % 3;
-    if (lesId === 0) {
-      lesId = 1;
-    }
-    cardItems = EMLectureHelper.getCardItemsFromLesson(this.state.lectureId, lesId);
-    this.setState({
-      lessonId : lesId
-    });
-    AsyncStorage.setItem(Key_AppState_LessonId, lesId.toString());
+    var spring = {
+      duration: 400,
+      create: {
+        type: LayoutAnimation.Types.spring,
+        property: LayoutAnimation.Properties.scaleXY,
+        springDamping: 0.7,
+      },
+      update: {
+        type: LayoutAnimation.Types.spring,
+        springDamping: 0.7,
+      },
+    };
+    LayoutAnimation.configureNext(spring);
+    let left = this.state.leftBarLeft < 0 ? 0 : -kLeftBarWidth;
+    this.setState({leftBarLeft: left});
+
+    // var lesId = (this.state.lessonId + 1) % 3;
+    // if (lesId === 0) {
+    //   lesId = 1;
+    // }
+    // cardItems = EMLectureHelper.getCardItemsFromLesson(this.state.lectureId, lesId);
+    // this.setState({
+    //   lessonId : lesId
+    // });
+    // AsyncStorage.setItem(Key_AppState_LessonId, lesId.toString());
   }
 
   __onPressMode() {
@@ -233,14 +256,27 @@ class EarlyMath extends Component {
           </TouchableOpacity>
         </View>
 
-        <View style={styles.container}>
-            {rows}
+        <View style={mainStyles.mainContainerInner}>
+          <View style={styles.container}>
+              {rows}
+          </View>
+
+          <View style={[mainStyles.leftBar, estyles.leftBar, {left: this.state.leftBarLeft, width: this.state.leftBarWidth}]}>
+            <View style={mainStyles.mainContainerInner}>
+            </View>
+          </View>
         </View>
+
 
       </View>
     );
   }
 }
+const estyles = EStyleSheet.create({
+  leftBar: {
+  height: '100%'
+  }
+});
 
 const styles = StyleSheet.create({
   container: {
