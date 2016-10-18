@@ -15,11 +15,16 @@ import {
   TouchableOpacity,
   Platform,
   NativeModules,
+  AsyncStorage,
 } from 'react-native';
 import GoogleAnalytics from 'react-native-google-analytics-bridge';
 import Config from 'react-native-config';
 
 var Speecher = NativeModules.EMSpeecher;
+
+var Key_AppState_ClassId = 'Key_AppState_ClassId';
+var Key_AppState_Language = 'Key_AppState_Language';
+var Key_AppState_Mode = 'Key_AppState_Mode';
 
 var mainStyles = require('./mainStyle');
 
@@ -38,21 +43,44 @@ class Card extends Component {
 class EarlyMath extends Component {
   constructor(props) {
     super(props);
+    this.__initAppState();
     this.__initApp();
     this.__initCardItems();
-    this.__initState();
+  }
+
+  __initAppState() {
+    this.state = {
+      'classId' : 1,  // 看图数数
+      'language': 0,
+      'mode': 0,
+    };
+    try {
+      AsyncStorage.multiGet([Key_AppState_ClassId, Key_AppState_Language, Key_AppState_Mode], (err, stores) => {
+        console.log(stores);
+        stores.map((result, i, store) => {
+          // get at each store's key/value so you can work with it
+          let key = store[i][0];
+          let value = store[i][1];
+          if (value) {
+            if (key === Key_AppState_ClassId) {
+              this.setState({classId : parseInt(value)});
+            } else if (key === Key_AppState_Language) {
+              this.setState({language : parseInt(value)});
+            } else if (key === Key_AppState_Mode) {
+              this.setState({mode : parseInt(value)});
+            }
+          }
+        });
+      });
+    } catch (e) {
+
+    } finally {
+
+    }
   }
 
   __initApp() {
     GoogleAnalytics.setTrackerId(Config.GA_Tracker_ID);
-  }
-
-  __initState() {
-    this.state = {
-      title: '看图数数',
-      language: 0,
-      mode: 0,
-    };
   }
 
   __initCardItems() {
@@ -132,20 +160,24 @@ class EarlyMath extends Component {
   }
 
   __onPressMode() {
-    console.log('mode');
+    var mode = (this.state.mode + 1) % 3;
+    this.setState({
+      mode : mode,
+      title : 'adaiye',
+    });
+    AsyncStorage.setItem(Key_AppState_Mode, mode.toString());
   }
 
   __onPressLanguage() {
-    console.log('language');
+    var language = (this.state.language === 0) ? 1 : 0;
+    this.setState({language : language});
+    AsyncStorage.setItem(Key_AppState_Language, language.toString());
   }
+
   __cardClicked(card): void {
     if (Speecher) {
       Speecher.speech(card, this.state.language);
     }
-
-    // this.setState({
-    //   language: this.state.language === 0 ? 1 : 0,
-    // });
   }
 
   render() {
@@ -184,16 +216,16 @@ class EarlyMath extends Component {
       <View style={mainStyles.mainContainer}>
 
         <View style={mainStyles.navBar}>
-          <TouchableOpacity style={mainStyles.navBarLeft} onPress={this.__onPressMore}>
+          <TouchableOpacity style={mainStyles.navBarLeft} onPress={this.__onPressMore.bind(this)}>
             <Image source={require('image!more')} style={mainStyles.navBarImage} />
           </TouchableOpacity>
           <View style={mainStyles.navBarTitle}>
-            <Text style={mainStyles.title}>{this.state.title}</Text>
+            <Text style={mainStyles.title}>{this.state.classId === 1 ? '看图数数' : '不知道'}</Text>
           </View>
-          <TouchableOpacity style={mainStyles.navBarRight2} onPress={this.__onPressLanguage}>
+          <TouchableOpacity style={mainStyles.navBarRight2} onPress={this.__onPressLanguage.bind(this)}>
             <Text style={mainStyles.navBarState}>{this.state.language === 0 ? '汉' : '英'}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={mainStyles.navBarRight} onPress={this.__onPressMode}>
+          <TouchableOpacity style={mainStyles.navBarRight} onPress={this.__onPressMode.bind(this)}>
             <Text style={mainStyles.navBarState}>模式</Text>
           </TouchableOpacity>
         </View>
