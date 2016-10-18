@@ -14,9 +14,12 @@ import {
   View,
   TouchableHighlight,
   Platform,
+  NativeModules,
 } from 'react-native';
 import GoogleAnalytics from 'react-native-google-analytics-bridge';
 import Config from 'react-native-config';
+
+var Speecher = NativeModules.EMSpeecher;
 
 var mainStyles = require('./mainStyle');
 
@@ -118,7 +121,7 @@ class EarlyMath extends Component {
       cardItems.push({
         number: number,
         image: image,
-        chineses: chineses[i],
+        chinese: chineses[i],
         english: englishs[i],
       });
     }
@@ -136,10 +139,13 @@ class EarlyMath extends Component {
     console.log('language');
   }
   __cardClicked(card): void {
-    console.log('number ' + card.number);
-    this.setState({
-      language: this.state.language === 0 ? 1 : 0,
-    });
+    if (Speecher) {
+      Speecher.speech(card, this.state.language);
+    }
+
+    // this.setState({
+    //   language: this.state.language === 0 ? 1 : 0,
+    // });
   }
 
   render() {
