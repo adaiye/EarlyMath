@@ -162,16 +162,6 @@ class EarlyMath extends Component {
     LayoutAnimation.configureNext(spring);
     let left = this.state.leftBarLeft < 0 ? 0 : -kLeftBarWidth;
     this.setState({leftBarLeft: left});
-
-    // var lesId = (this.state.lessonId + 1) % 3;
-    // if (lesId === 0) {
-    //   lesId = 1;
-    // }
-    // cardItems = EMLectureHelper.getCardItemsFromLesson(this.state.lectureId, lesId);
-    // this.setState({
-    //   lessonId : lesId
-    // });
-    // AsyncStorage.setItem(Key_AppState_LessonId, lesId.toString());
   }
 
   __onPressMode() {
@@ -207,9 +197,21 @@ class EarlyMath extends Component {
     return '';
   }
 
+  __onPressRow(rowData) {
+    this.__onPressMore();
+
+    var lesId = rowData.id;
+    cardItems = EMLectureHelper.getCardItemsFromLesson(this.state.lectureId, lesId);
+    this.setState({
+      lessonId : lesId,
+    });
+    AsyncStorage.setItem(Key_AppState_LessonId, lesId.toString());
+
+  }
+
   __renderRow(rowData) {
     var s = this.state.lessonId === rowData.id ? styles.listViewTextSelected : styles.listViewText;
-    return (<View style={styles.listViewRow}><Text style={[s, {width: this.state.leftBarWidth}]}>{rowData.title}</Text></View>);
+    return (<TouchableOpacity onPress={this.__onPressRow.bind(this, rowData)} style={styles.listViewRow}><Text style={[s, {width: this.state.leftBarWidth}]}>{rowData.title}</Text></TouchableOpacity>);
   }
 
   render() {
