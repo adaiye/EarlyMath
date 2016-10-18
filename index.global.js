@@ -12,7 +12,7 @@ import {
   Text,
   Image,
   View,
-  TouchableHighlight,
+  TouchableOpacity,
   Platform,
   NativeModules,
 } from 'react-native';
@@ -161,12 +161,12 @@ class EarlyMath extends Component {
         style = [styles.card, styles.card2];
       }
       cards.push(
-          <TouchableHighlight
+          <TouchableOpacity
               style={style}
               key={card.number}
               onPress={this.__cardClicked.bind(this, card)} >
               {inner}
-          </TouchableHighlight>
+          </TouchableOpacity>
       );
     }
 
@@ -184,18 +184,18 @@ class EarlyMath extends Component {
       <View style={mainStyles.mainContainer}>
 
         <View style={mainStyles.navBar}>
-          <TouchableHighlight style={mainStyles.navBarLeft} onPress={this.__onPressMore}>
+          <TouchableOpacity style={mainStyles.navBarLeft} onPress={this.__onPressMore}>
             <Image source={require('image!more')} style={mainStyles.navBarImage} />
-          </TouchableHighlight>
+          </TouchableOpacity>
           <View style={mainStyles.navBarTitle}>
             <Text style={mainStyles.title}>{this.state.title}</Text>
           </View>
-          <TouchableHighlight style={mainStyles.navBarRight2} onPress={this.__onPressLanguage}>
+          <TouchableOpacity style={mainStyles.navBarRight2} onPress={this.__onPressLanguage}>
             <Text style={mainStyles.navBarState}>{this.state.language === 0 ? '汉' : '英'}</Text>
-          </TouchableHighlight>
-          <TouchableHighlight style={mainStyles.navBarRight} onPress={this.__onPressMode}>
+          </TouchableOpacity>
+          <TouchableOpacity style={mainStyles.navBarRight} onPress={this.__onPressMode}>
             <Text style={mainStyles.navBarState}>模式</Text>
-          </TouchableHighlight>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.container}>
