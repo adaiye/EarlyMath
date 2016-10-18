@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 import GoogleAnalytics from 'react-native-google-analytics-bridge';
 
-var mainStyles = require('./mainStyle');
+var mainStyles = require('./global/mainstyle');
 
 var numberOfRow = 5, numberPerRow = 3;
 var cardItems = [];

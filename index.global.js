@@ -26,7 +26,7 @@ var Key_AppState_ClassId = 'Key_AppState_ClassId';
 var Key_AppState_Language = 'Key_AppState_Language';
 var Key_AppState_Mode = 'Key_AppState_Mode';
 
-var mainStyles = require('./mainStyle');
+var mainStyles = require('./global/mainstyle');
 
 var numberOfRow = 5, numberPerRow = 3;
 var cardItems = [];
