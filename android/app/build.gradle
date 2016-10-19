@@ -1,8 +1,6 @@
 apply plugin: "com.android.application"
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
-import com.android.build.OutputFile
-
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
  * and bundleReleaseJsAndAssets).
@@ -78,10 +76,6 @@ apply from: "../../node_modules/react-native/react.gradle"
  */
 def enableSeparateBuildPerCPUArchitecture = false
 
-/**
- * Run Proguard to shrink the Java bytecode in release builds.
- */
-def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion 24
@@ -97,33 +91,88 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
     }
-    splits {
-        abi {
-            reset()
-            enable enableSeparateBuildPerCPUArchitecture
-            universalApk false  // If true, also generate a universal APK
-            include "armeabi-v7a", "x86"
+
+//    splits {
+//        abi {
+//            reset()
+//            enable enableSeparateBuildPerCPUArchitecture
+//            universalApk false  // If true, also generate a universal APK
+//            include "armeabi-v7a", "x86"
+//        }
+//    }
+
+    signingConfigs {
+        debug {
+        }
+
+        release {
+            storeFile file("../EarlyMath.jks")
+            storePassword "19860322"
+            keyAlias "adaiye_EarlyMath"
+            keyPassword "19860322"
         }
     }
+
+    //  渠道
+    productFlavors {
+        Test {}
+//        QQ {}
+//        XiaoMi {}
+//        JinLi {}
+//        WanDouJia {}
+//        Baidu {}
+//        Google {}
+//        HuaWei {}
+//        QiHu360 {}
+//        Lenovo {}
+//        LianTong {}
+//        YiDong {}
+//        PP {}
+//        MeiPai {}
+//        Vivo {}
+//        Oppo {}
+    }
+
     buildTypes {
         release {
-            minifyEnabled enableProguardInReleaseBuilds
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+
+            minifyEnabled true
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-        }
-    }
-    // applicationVariants are e.g. debug, release
-    applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            // For each separate APK per architecture, set a unique version code as described here:
-            // http://tools.android.com/tech-docs/new-build-system/user-guide/apk-splits
-            def versionCodes = ["armeabi-v7a":1, "x86":2]
-            def abi = output.getFilter(OutputFile.ABI)
-            if (abi != null) {  // null for the universal-debug, universal-release variants
-                output.versionCodeOverride =
-                        versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
+
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        def fileName = "EarlyMath_v${defaultConfig.versionName}_${variant.productFlavors[0].name}.apk"
+                        def appRealseDir = file("../../ApkRelease/v${defaultConfig.versionName}/")
+                        output.outputFile = new File(appRealseDir, fileName)
+                    }
+                }
+
             }
         }
     }
+
+//    // applicationVariants are e.g. debug, release
+//    applicationVariants.all { variant ->
+//        variant.outputs.each { output ->
+//            // For each separate APK per architecture, set a unique version code as described here:
+//            // http://tools.android.com/tech-docs/new-build-system/user-guide/apk-splits
+//            def versionCodes = ["armeabi-v7a":1, "x86":2]
+//            def abi = output.getFilter(OutputFile.ABI)
+//            if (abi != null) {  // null for the universal-debug, universal-release variants
+//                output.versionCodeOverride =
+//                        versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
+//            }
+//        }
+//    }
 }
 
 dependencies {

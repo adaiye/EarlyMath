@@ -37,4 +37,6 @@ npm-debug.log
 # BUCK
 buck-out/
 \.buckd/
+ApkRelease/
 android/keystores/debug.keystore
+android/app/app-release.apk
