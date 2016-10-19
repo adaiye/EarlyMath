@@ -255,7 +255,19 @@ class EarlyMath extends Component {
 
   __renderRow(rowData) {
     var s = this.state.lessonId === rowData.id ? styles.listViewTextSelected : styles.listViewText;
-    return (<TouchableOpacity onPress={this.__onPressRow.bind(this, rowData)} style={styles.listViewRow}><Text style={[s, {width: this.state.leftBarWidth}]}>{rowData.title}</Text></TouchableOpacity>);
+    return (
+      <TouchableOpacity onPress={this.__onPressRow.bind(this, rowData)} style={styles.listViewRow}>
+        <Text style={[s, {width: this.state.leftBarWidth}]}>{rowData.title}</Text>
+      </TouchableOpacity>
+    );
+  }
+
+  __renderMode(index, text) {
+    return (
+      <TouchableOpacity key={index} style={mainStyles.navBarRightItem} onPress={this.__onPressMode.bind(this, index)}>
+        <Text style={this.state.mode === index ? mainStyles.navBarStateSelected : mainStyles.navBarState}>{text}</Text>
+      </TouchableOpacity>
+    );
   }
 
   componentDidMount() {
@@ -293,6 +305,18 @@ class EarlyMath extends Component {
         )
     }
 
+    var modes = ['点读', '提问'];
+    var modeViews = [];
+    for (var i = 0; i < modes.length; i++) {
+      if (i > 0) {
+        modeViews.push(
+          <View key={'split'+i} style={mainStyles.navBarRightItemSplit} />
+        );
+      }
+      modeViews.push(this.__renderMode(i, modes[i]));
+    }
+
+
     return (
       <View style={mainStyles.mainContainer}>
 
@@ -306,14 +330,8 @@ class EarlyMath extends Component {
           <TouchableOpacity style={[mainStyles.navBarRight2, mainStyles.navBarButton]} onPress={this.__onPressLanguage.bind(this)}>
             <Text style={mainStyles.navBarState}>{this.__getLanguageTitle()}</Text>
           </TouchableOpacity>
-          <View style={[mainStyles.navBarRight, mainStyles.navBarButton]}>
-            <TouchableOpacity style={mainStyles.navBarRightItem} onPress={this.__onPressMode.bind(this, 0)}>
-              <Text style={this.state.mode === 0 ? mainStyles.navBarStateSelected : mainStyles.navBarState}>点读</Text>
-            </TouchableOpacity>
-            <View style={mainStyles.navBarRightItemSplit} />
-            <TouchableOpacity style={mainStyles.navBarRightItem} onPress={this.__onPressMode.bind(this, 1)}>
-              <Text style={this.state.mode === 1 ? mainStyles.navBarStateSelected : mainStyles.navBarState}>提问</Text>
-            </TouchableOpacity>
+          <View style={[mainStyles.navBarRight, mainStyles.navBarButton, {width : 50 * modes.length, }]}>
+            {modeViews}
           </View>
         </View>
 
