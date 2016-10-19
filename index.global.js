@@ -50,6 +50,8 @@ class Lecture {
 var kLeftBarWidth = 100;
 var numberOfRow = 5, numberPerRow = 3;
 var cardItems;
+var questionIndexesUnasked;   // 没有提问过的问题索引
+var currentQuestionCard;   // 当前问题的答案卡片
 var lectureItems;
 
 class Card extends Component {
@@ -67,7 +69,7 @@ class EarlyMath extends Component {
     this.__initLecture();
     this.__initAppState();
     this.__initApp();
-    this.__initCardItems();
+    this.__initCardItems(this.state.lectureId, this.state.lessonId);
     // calculate styles
     EStyleSheet.build();
   }
@@ -95,6 +97,7 @@ class EarlyMath extends Component {
               this.setState({language : iVal});
             } else if (key === Key_AppState_Mode) {
               this.setState({mode : iVal});
+              this.__startAskQuestion(iVal, '');
             } else if (key === Key_AppState_LectureId || key === Key_AppState_LessonId) {
               let lecId = this.state.lectureId;
               let lesId = this.state.lessonId;
@@ -103,7 +106,7 @@ class EarlyMath extends Component {
               } else {
                 lesId = iVal;
               }
-              cardItems = EMLectureHelper.getCardItemsFromLesson(lecId, lesId);
+              this.__initCardItems(lecId, lesId);
               this.setState({
                 lectureId : lecId,
                 lessonId : lesId
@@ -142,8 +145,16 @@ class EarlyMath extends Component {
     GoogleAnalytics.setTrackerId(Config.GA_Tracker_ID);
   }
 
-  __initCardItems() {
-    cardItems = EMLectureHelper.getCardItemsFromLesson(this.state.lectureId, this.state.lessonId);
+  __initCardItems(lectureId, lessonId) {
+    cardItems = EMLectureHelper.getCardItemsFromLesson(lectureId, lessonId);
+    this.__initQuestionIndexes();
+  }
+
+  __initQuestionIndexes() {
+    questionIndexesUnasked = [];
+    for (var i = 0; i < cardItems.length; i++) {
+      questionIndexesUnasked.push(i);
+    }
   }
 
   __onPressMore() {
@@ -164,12 +175,28 @@ class EarlyMath extends Component {
     this.setState({leftBarLeft: left});
   }
 
-  __onPressMode() {
-    var mode = (this.state.mode + 1) % 3;
+  __onPressMode(mode) {
     this.setState({
       mode : mode
     });
     AsyncStorage.setItem(Key_AppState_Mode, mode.toString());
+    this.__startAskQuestion(mode, '');
+  }
+
+  // 开始提问
+  __startAskQuestion(mode, preSentence) {
+    if (mode === 1) {
+      if (!questionIndexesUnasked || questionIndexesUnasked.length == 0) {
+        this.__initQuestionIndexes();
+      }
+      let i = Math.floor((Math.random() * 100) + 1) % questionIndexesUnasked.length;
+      let index = questionIndexesUnasked[i];
+      questionIndexesUnasked.splice(i, 1);   // remove the index
+      currentQuestionCard = cardItems[index];
+      if (Speecher) {
+        Speecher.speech(preSentence + currentQuestionCard.question);
+      }
+    }
   }
 
   __onPressLanguage() {
@@ -180,7 +207,17 @@ class EarlyMath extends Component {
 
   __cardClicked(card): void {
     if (Speecher) {
-      Speecher.speech(card, this.state.language);
+      if (this.state.mode === 1 && currentQuestionCard) {
+        if (currentQuestionCard == card) {
+          this.__startAskQuestion(this.state.mode, '恭喜你，答对了！');
+        } else {
+          let sentences = ['答错了，再试试看吧！', '不对！再试一次吧！'];
+          let i = Math.floor((Math.random() * 10) + 1) % sentences.length;
+          Speecher.speech(sentences[i] + currentQuestionCard.question);
+        }
+      } else {
+        Speecher.speechCard(card, this.state.language);
+      }
     }
   }
 
@@ -197,11 +234,18 @@ class EarlyMath extends Component {
     return '';
   }
 
+  __getLanguageTitle() {
+    if (this.state.mode === 1) {   // 提问
+      return '汉';
+    }
+    return this.state.language === 0 ? '汉' : '英';
+  }
+
   __onPressRow(rowData) {
     this.__onPressMore();
 
     var lesId = rowData.id;
-    cardItems = EMLectureHelper.getCardItemsFromLesson(this.state.lectureId, lesId);
+    this.__initCardItems(this.state.lectureId, lesId);
     this.setState({
       lessonId : lesId,
     });
@@ -211,7 +255,22 @@ class EarlyMath extends Component {
 
   __renderRow(rowData) {
     var s = this.state.lessonId === rowData.id ? styles.listViewTextSelected : styles.listViewText;
-    return (<TouchableOpacity onPress={this.__onPressRow.bind(this, rowData)} style={styles.listViewRow}><Text style={[s, {width: this.state.leftBarWidth}]}>{rowData.title}</Text></TouchableOpacity>);
+    return (
+      <TouchableOpacity onPress={this.__onPressRow.bind(this, rowData)} style={styles.listViewRow}>
+        <Text style={[s, {width: this.state.leftBarWidth}]}>{rowData.title}</Text>
+      </TouchableOpacity>
+    );
+  }
+
+  __renderMode(index, text) {
+    return (
+      <TouchableOpacity key={index} style={mainStyles.navBarRightItem} onPress={this.__onPressMode.bind(this, index)}>
+        <Text style={this.state.mode === index ? mainStyles.navBarStateSelected : mainStyles.navBarState}>{text}</Text>
+      </TouchableOpacity>
+    );
+  }
+
+  componentDidMount() {
   }
 
   render() {
@@ -246,6 +305,18 @@ class EarlyMath extends Component {
         )
     }
 
+    var modes = ['点读', '提问'];
+    var modeViews = [];
+    for (var i = 0; i < modes.length; i++) {
+      if (i > 0) {
+        modeViews.push(
+          <View key={'split'+i} style={mainStyles.navBarRightItemSplit} />
+        );
+      }
+      modeViews.push(this.__renderMode(i, modes[i]));
+    }
+
+
     return (
       <View style={mainStyles.mainContainer}>
 
@@ -256,12 +327,12 @@ class EarlyMath extends Component {
           <View style={mainStyles.navBarTitle}>
             <Text style={mainStyles.title}>{this.__getTitle()}</Text>
           </View>
-          <TouchableOpacity style={mainStyles.navBarRight2} onPress={this.__onPressLanguage.bind(this)}>
-            <Text style={mainStyles.navBarState}>{this.state.language === 0 ? '汉' : '英'}</Text>
+          <TouchableOpacity style={[mainStyles.navBarRight2, mainStyles.navBarButton]} onPress={this.__onPressLanguage.bind(this)}>
+            <Text style={mainStyles.navBarState}>{this.__getLanguageTitle()}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={mainStyles.navBarRight} onPress={this.__onPressMode.bind(this)}>
-            <Text style={mainStyles.navBarState}>模式</Text>
-          </TouchableOpacity>
+          <View style={[mainStyles.navBarRight, mainStyles.navBarButton, {width : 50 * modes.length, }]}>
+            {modeViews}
+          </View>
         </View>
 
         <View style={mainStyles.mainContainerInner}>

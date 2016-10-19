@@ -73,7 +73,16 @@
 
 RCT_EXPORT_MODULE();
 
-RCT_EXPORT_METHOD(speech:(NSDictionary *)cardItem language:(NSInteger)language)
+RCT_EXPORT_METHOD(speech:(NSString *)sentence)
+{
+  NSError *err;
+  [self.speechSynthesizer speakSentence:sentence withError:&err];
+  if (err) {
+    NSLog(@"%@", err);
+  }
+}
+
+RCT_EXPORT_METHOD(speechCard:(NSDictionary *)cardItem language:(NSInteger)language)
 {
   BDSSynthesizerStatus state = [self.speechSynthesizer synthesizerStatus];
   switch (state) {
@@ -86,11 +95,7 @@ RCT_EXPORT_METHOD(speech:(NSDictionary *)cardItem language:(NSInteger)language)
   
   NSString *key = language == 0 ? @"chinese" : @"english";
   NSString *value = cardItem[key];
-  NSError *err;
-  [self.speechSynthesizer speakSentence:value withError:&err];
-  if (err) {
-    NSLog(@"%@", err);
-  }
+  [self speech:value];
 }
 
 #pragma mark - BDSSpeechSynthesizerDelegate

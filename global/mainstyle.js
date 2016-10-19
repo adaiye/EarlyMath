@@ -68,16 +68,39 @@ module.exports = StyleSheet.create({
   },
 
   navBarRight2 : {
-    width : 40,
+    width : 50,
+    marginRight : 5,
     justifyContent : 'center',
     alignItems : 'center',
   },
 
   navBarRight : {
-    paddingRight : 15,
-    width : 60,
+    marginRight : 15,
+    width : 100,
     justifyContent : 'center',
     alignItems : 'flex-end',
+    flexDirection : 'row',
+    flexDirection : 'row',
+  },
+
+  navBarButton : {
+    marginTop : 5,
+    marginBottom : 5,
+    borderColor : '#F5CF87',
+    borderWidth : 0.5,
+    borderRadius: 4,
+  },
+
+  navBarRightItem : {
+    width : 50,
+    height : 34,
+    justifyContent : 'center',
+    alignItems : 'center',
+  },
+  navBarRightItemSplit : {
+    width : 0.5,
+    height : 33,
+    backgroundColor : '#F5CF87',
   },
 
   navBarImage : {
@@ -96,6 +119,10 @@ module.exports = StyleSheet.create({
   navBarState : {
     fontSize : 17,
     color : 'white',
+  },
+  navBarStateSelected : {
+    fontSize : 17,
+    color : '#F5CF87',
   },
 
   title : {

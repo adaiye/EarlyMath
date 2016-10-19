@@ -9,8 +9,8 @@ exports.getCardItemsFromLesson = function(lectureId, lessonId) {
   let images = [], chineses;
   if (lessonId == 2) { // 看数认数
     chineses = [
-      '一',
-      '两',
+      '衣',
+      '二',
       '三',
       '四',
       '五',
@@ -39,7 +39,7 @@ exports.getCardItemsFromLesson = function(lectureId, lessonId) {
     ];
 
     chineses = [
-      '一辆汽车',
+      '衣辆汽车',
       '两头狮子',
       '三头大象',
       '四个苹果',
@@ -75,6 +75,24 @@ exports.getCardItemsFromLesson = function(lectureId, lessonId) {
     'zero',
   ];
 
+  let questions = [
+    '小朋友，衣在哪里？',
+    '小朋友，二在哪里？',
+    '小朋友，三在哪里？',
+    '小朋友，四在哪里？',
+    '小朋友，五在哪里？',
+    '小朋友，六在哪里？',
+    '小朋友，七在哪里？',
+    '小朋友，八在哪里？',
+    '小朋友，九在哪里？',
+    '小朋友，十在哪里？',
+    '小朋友，二十在哪里？',
+    '小朋友，三十在哪里？',
+    '小朋友，四十在哪里？',
+    '小朋友，五十在哪里？',
+    '小朋友，零在哪里？',
+  ];
+
   for (var i = 0; i < numberPerRow * numberOfRow; i++) {
     var image, number = i + 1;
 
@@ -96,6 +114,7 @@ exports.getCardItemsFromLesson = function(lectureId, lessonId) {
       image : image,
       chinese : chineses[i],
       english : englishs[i],
+      question : questions[i],
     });
   }
 
