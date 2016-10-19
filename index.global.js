@@ -164,8 +164,7 @@ class EarlyMath extends Component {
     this.setState({leftBarLeft: left});
   }
 
-  __onPressMode() {
-    var mode = (this.state.mode + 1) % 3;
+  __onPressMode(mode) {
     this.setState({
       mode : mode
     });
@@ -256,12 +255,18 @@ class EarlyMath extends Component {
           <View style={mainStyles.navBarTitle}>
             <Text style={mainStyles.title}>{this.__getTitle()}</Text>
           </View>
-          <TouchableOpacity style={mainStyles.navBarRight2} onPress={this.__onPressLanguage.bind(this)}>
+          <TouchableOpacity style={[mainStyles.navBarRight2, mainStyles.navBarButton]} onPress={this.__onPressLanguage.bind(this)}>
             <Text style={mainStyles.navBarState}>{this.state.language === 0 ? '汉' : '英'}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={mainStyles.navBarRight} onPress={this.__onPressMode.bind(this)}>
-            <Text style={mainStyles.navBarState}>模式</Text>
-          </TouchableOpacity>
+          <View style={[mainStyles.navBarRight, mainStyles.navBarButton]}>
+            <TouchableOpacity style={mainStyles.navBarRightItem} onPress={this.__onPressMode.bind(this, 0)}>
+              <Text style={this.state.mode === 0 ? mainStyles.navBarStateSelected : mainStyles.navBarState}>点读</Text>
+            </TouchableOpacity>
+            <View style={mainStyles.navBarRightItemSplit} />
+            <TouchableOpacity style={mainStyles.navBarRightItem} onPress={this.__onPressMode.bind(this, 1)}>
+              <Text style={this.state.mode === 1 ? mainStyles.navBarStateSelected : mainStyles.navBarState}>提问</Text>
+            </TouchableOpacity>
+          </View>
         </View>
 
         <View style={mainStyles.mainContainerInner}>
