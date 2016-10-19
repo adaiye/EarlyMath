@@ -72,11 +72,15 @@ public class EMSpeecher extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void speech(ReadableMap cardItem, Integer language) {
+    public void speech(String sentence) {
         speechSynthesizer.stop();
+        speechSynthesizer.speak(sentence);
+    }
 
+    @ReactMethod
+    public void speechCard(ReadableMap cardItem, Integer language) {
         String key = language == 0 ? "chinese" : "english";
         String value = cardItem.getString(key);
-        speechSynthesizer.speak(value);
+        this.speech(value);
     }
 }

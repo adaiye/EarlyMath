@@ -179,7 +179,13 @@ class EarlyMath extends Component {
 
   __cardClicked(card): void {
     if (Speecher) {
-      Speecher.speech(card, this.state.language);
+      if (this.state.mode === 1) {
+        let sentences = ['答错了，再试试看吧！', '不对！再试一次吧！'];
+        let i = Math.floor((Math.random() * 10) + 1) % sentences.length;
+        Speecher.speech(sentences[i]);
+      } else {
+        Speecher.speechCard(card, this.state.language);
+      }
     }
   }
 
