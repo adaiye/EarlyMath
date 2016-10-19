@@ -430,7 +430,7 @@ const styles = StyleSheet.create({
     justifyContent : 'center',
     alignItems : 'center',
     fontSize : 17,
-    color : 'red'
+    color : '#F5CF87'
   }
 });
 
