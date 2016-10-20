@@ -80,7 +80,6 @@ module.exports = StyleSheet.create({
     justifyContent : 'center',
     alignItems : 'flex-end',
     flexDirection : 'row',
-    flexDirection : 'row',
   },
 
   navBarButton : {
