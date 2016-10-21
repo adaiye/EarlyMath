@@ -1,8 +1,12 @@
 package com.adaiye.EarlyMath.Common;
 
+import android.util.Log;
+
 import com.adaiye.EarlyMath.BuildConfig;
 import com.baidu.tts.auth.AuthInfo;
+import com.baidu.tts.client.SpeechError;
 import com.baidu.tts.client.SpeechSynthesizer;
+import com.baidu.tts.client.SpeechSynthesizerListener;
 import com.baidu.tts.client.TtsMode;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -17,7 +21,7 @@ import static com.baidu.tts.client.SpeechSynthesizer.MIX_MODE_DEFAULT;
  * Created by designerii on 2016/10/18.
  */
 
-public class EMSpeecher extends ReactContextBaseJavaModule {
+public class EMSpeecher extends ReactContextBaseJavaModule implements SpeechSynthesizerListener {
 
     private SpeechSynthesizer speechSynthesizer;
 
@@ -28,8 +32,8 @@ public class EMSpeecher extends ReactContextBaseJavaModule {
         speechSynthesizer = SpeechSynthesizer.getInstance();
         // 设置 app 上下文（必需参数）
         speechSynthesizer.setContext(reactContext);
-//        // 设置 tts 监听器
-//        speechSynthesizer.setSpeechSynthesizerListener(SpeechSynthesizerListener);
+        // 设置 tts 监听器
+        speechSynthesizer.setSpeechSynthesizerListener(this);
 //        // 文本模型文件路径， 文件的绝对路径 (离线引擎使用)
 //        speechSynthesizer.setParam(SpeechSynthesizer.PARAM_TTS_TEXT_MODEL_FILE,
 //                TEXT_MODEL_FILE_FULL_PATH_NAME);
@@ -82,5 +86,40 @@ public class EMSpeecher extends ReactContextBaseJavaModule {
         String key = language == 0 ? "chinese" : "english";
         String value = cardItem.getString(key);
         this.speech(value);
+    }
+
+    @Override
+    public void onSynthesizeStart(String s) {
+        Log.d("SynthesizeStart", s);
+    }
+
+    @Override
+    public void onSynthesizeDataArrived(String s, byte[] bytes, int i) {
+        Log.d("DataArrived", s);
+    }
+
+    @Override
+    public void onSynthesizeFinish(String s) {
+        Log.d("SynthesizeFinish", s);
+    }
+
+    @Override
+    public void onSpeechStart(String s) {
+        Log.d("SpeechStart", s);
+    }
+
+    @Override
+    public void onSpeechProgressChanged(String s, int i) {
+
+    }
+
+    @Override
+    public void onSpeechFinish(String s) {
+        Log.d("Finish", s);
+    }
+
+    @Override
+    public void onError(String s, SpeechError speechError) {
+        Log.e(s, speechError.toString());
     }
 }

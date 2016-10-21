@@ -67,3 +67,6 @@
 
 # ReactNativeConfig
 -keep class com.adaiye.EarlyMath.BuildConfig { *; }
+
+# Baidu YuYin
+-keep class com.baidu.tts { *; }
