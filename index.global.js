@@ -142,7 +142,7 @@ class EarlyMath extends Component {
   }
 
   __initApp() {
-    GoogleAnalytics.setTrackerId(Config.GA_Tracker_ID);
+    GoogleAnalytics.setTrackerId('UA-85477621-1');
   }
 
   __initCardItems(lectureId, lessonId) {
